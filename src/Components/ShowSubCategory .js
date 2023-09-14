@@ -8,13 +8,13 @@ import { show_alerta } from '../functions';
 //import DataTable from 'datatables.net-dt';
 //import '../styles.css';
 
-const ShowCategory = () => {
-  const url = ' https://localhost:7028/api/categories ';
-  const [categoryId,setCategoryId] = useState('')
+const ShowSubCategory = () => {
+  const url = ' https://localhost:7028/api/subcategories';
+  const [subCategoryId,setSubCategoryId] = useState('')
 
-  const URL = `https://localhost:7028/api/categories${categoryId}`;
+  const URL = `https://localhost:7028/api/subcategories${subCategoryId}`;
   
-  const [categories,setCategories] = useState([])
+  const [subCategories,setSubCategories] = useState([])
   const [name,setName] = useState('')
   
   const [state,setState] = useState()
@@ -24,12 +24,12 @@ const ShowCategory = () => {
   const [title, setTitle] = useState('');
 
   useEffect(() => {
-    getCategory();
+    getSubCategory();
   }, []);
 
-  const getCategory = async () => {
+  const getSubCategory = async () => {
     const respuesta = await axios.get(url);
-    setCategories(respuesta.data);
+    setSubCategories(respuesta.data);
   };
 
   const openModal = (op, name,state,creationDate,modificationDate) => {
@@ -41,9 +41,9 @@ const ShowCategory = () => {
 
 
     if (op === 1) {
-      setTitle('Registrar Categoria');
+      setTitle('Registrar SubCategoria');
     } else if (op === 2) {
-      setTitle('Editar Categoria');
+      setTitle('Editar SubCategoria');
       setName(name);
       setState(state)
       setCreationDate(creationDate)
@@ -59,11 +59,11 @@ const ShowCategory = () => {
     var parametros;
     var metodo;
     if (name.trim() === ''){
-        show_alerta('Escribe el nombre del autoparte.', 'warning');
+        show_alerta('Escribe el nombre de la Subcategoria.', 'warning');
     }
     
     else if(state.trim() === ''){
-      show_alerta('Escribe el estado del autoparte', 'warning');   
+      show_alerta('Escribe el estado de la Subcategoria', 'warning');   
      }
     
     else 
@@ -85,8 +85,8 @@ const ShowCategory = () => {
         };
         metodo = 'PUT';
       }
-      enviarSolicitud(metodo, parametros,categoryId);
-      confirmarSolicitud(metodo, parametros, categoryId);
+      enviarSolicitud(metodo, parametros,subCategoryId);
+      confirmarSolicitud(metodo, parametros, subCategoryId);
       
     }
   };
@@ -99,7 +99,7 @@ const ShowCategory = () => {
         show_alerta(msj, tipo);
         if (tipo === 'success') {
           document.getElementById('btnCerrar').click();
-          getCategory();
+          getSubCategory();
         }
       })
       .catch(function (error) {
@@ -115,7 +115,7 @@ const ShowCategory = () => {
         show_alerta(msj, tipo);
         if (tipo === 'success') {
           document.getElementById('btnCerrar').click();
-          getCategory();
+          getSubCategory();
         }
       })
       .catch(function (error) {
@@ -123,7 +123,7 @@ const ShowCategory = () => {
         console.log(error);
       });
   };
-  const deleteAutopart = (categoryId, name) => {
+  const deleteAutopart = (subCategoryId, name) => {
     const MySwal = withReactContent(Swal);
 
     MySwal.fire({
@@ -137,16 +137,16 @@ const ShowCategory = () => {
       if (result.isConfirmed) {
         try {
           // Realizar la solicitud DELETE al servidor
-          await axios.delete(`${url}/${categoryId}`);
+          await axios.delete(`${url}/${subCategoryId}`);
 
-          show_alerta('Categoria eliminado exitosamente', 'success');
-          getCategory();
+          show_alerta('SubCategoria eliminado exitosamente', 'success');
+          getSubCategory();
         } catch (error) {
-          show_alerta('Error al eliminar la Categoria', 'error');
+          show_alerta('Error al eliminar la SubCategoria', 'error');
           console.error(error);
         }
       } else {
-        show_alerta('La Categoria no fue eliminado', 'info');
+        show_alerta('La SubCategoria no fue eliminado', 'info');
       }
     });
   
@@ -184,7 +184,7 @@ const ShowCategory = () => {
         <div className='row mt-3'>
           <div className='col-md-4 offset-4'>
             <div className='d-grid mx-auto'>
-              <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalCategory'>
+              <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalSubCategory'>
                 <i className='fa-solid fa-circle-plus'></i> Añadir
               </button>
             </div>
@@ -205,32 +205,32 @@ const ShowCategory = () => {
                   </tr>
                 </thead>
                 <tbody className='table-group-divider'>
-                  {categories.map((categories, i) => (
-                    <tr key={categories.categoryId}>
+                  {subCategories.map((subCategories, i) => (
+                    <tr key={subCategories.categoryId}>
                       <td>{i + 1}</td>
-                      <td>{categories.name}</td>
+                      <td>{subCategories.name}</td>
 
-                      <td>{categories.state}</td>
-                      <td>{categories.creationDate}</td>
-                      <td>{categories.modificationDate}</td>
+                      <td>{subCategories.state}</td>
+                      <td>{subCategories.creationDate}</td>
+                      <td>{subCategories.modificationDate}</td>
                       <td>
                         <button
                           onClick={() =>
                             openModal(2,
-                                categories.name,
-                               categories.state,
-                               categories.creationDate, 
-                               categories.modModificationDate)
+                              subCategories.name,
+                              subCategories.state,
+                              subCategories.creationDate, 
+                              subCategories.modModificationDate)
                           }
                           className='btn btn-warning'
                           data-bs-toggle='modal'
-                          data-bs-target='#modalCategory'
+                          data-bs-target='#modalSubCategory'
                         >
                           <i className='fa-solid fa-edit'></i>
                         </button>
                         &nbsp;
                        
-                        <button onClick={()=>deleteAutopart(categories.categoryId,categories.name)} className="btn btn-danger">
+                        <button onClick={()=>deleteAutopart(subCategories.subCategoryId,subCategories.name)} className="btn btn-danger">
                             <i className="fa-solid fa-trash"></i>
                         </button>
                         
@@ -268,7 +268,7 @@ const ShowCategory = () => {
           </div>
         </div>
       </div>
-      <div id='modalCategory' className='modal fade' aria-hidden='true'>
+      <div id='modalSubCategory' className='modal fade' aria-hidden='true'>
         <div className='modal-dialog'>
           <div className='modal-content'>
             <div className='modal-header'>
@@ -286,8 +286,8 @@ const ShowCategory = () => {
                   id='autoparte'
                   className='form-control'
                   placeholder='Autoparte Id'
-                  value={categoryId}
-                  onChange={(e) => setCategoryId(e.target.value)}
+                  value={subCategoryId}
+                  onChange={(e) => setSubCategoryId(e.target.value)}
                 ></input>
               </div>
               <div className='input-group mb-3'>
@@ -347,4 +347,4 @@ const ShowCategory = () => {
   );
 };
 
-export default ShowCategory;
+export default ShowSubCategory;
