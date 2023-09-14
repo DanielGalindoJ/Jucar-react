@@ -285,7 +285,7 @@ const ShowCategory = () => {
                   type='text'
                   id='autoparte'
                   className='form-control'
-                  placeholder='Autoparte Id'
+                  placeholder='Categoria Id'
                   value={categoryId}
                   onChange={(e) => setCategoryId(e.target.value)}
                 ></input>
@@ -298,7 +298,7 @@ const ShowCategory = () => {
                   type='text'
                   id='name'
                   className='form-control'
-                  placeholder='Nombre Autoparte'
+                  placeholder='Nombre de la Categoria'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 ></input>
@@ -312,7 +312,7 @@ const ShowCategory = () => {
                   type='text'
                   id='description'
                   className='form-control'
-                  placeholder='Estado del producto'
+                  placeholder='Estado de la Categoria'
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                 ></input>

@@ -54,7 +54,7 @@ const ShowSubCategory = () => {
     }, 500);
   };
 
-  const validar = (categoryId) => {
+  const validar = (subCategoryId) => {
     console.log("Validar función ejecutada"); // Mensaje de depuración
     var parametros;
     var metodo;
@@ -127,7 +127,7 @@ const ShowSubCategory = () => {
     const MySwal = withReactContent(Swal);
 
     MySwal.fire({
-      title: `¿Seguro desea eliminar este usuario ${name}?`,
+      title: `¿Seguro desea eliminar esta SubCategoria ${name}?`,
       icon: 'question',
       text: 'No se podrá dar marcha atrás',
       showCancelButton: true,
@@ -206,7 +206,7 @@ const ShowSubCategory = () => {
                 </thead>
                 <tbody className='table-group-divider'>
                   {subCategories.map((subCategories, i) => (
-                    <tr key={subCategories.categoryId}>
+                    <tr key={subCategories.subCategoryId}>
                       <td>{i + 1}</td>
                       <td>{subCategories.name}</td>
 
@@ -285,7 +285,7 @@ const ShowSubCategory = () => {
                   type='text'
                   id='autoparte'
                   className='form-control'
-                  placeholder='Autoparte Id'
+                  placeholder='Subcategoria Id'
                   value={subCategoryId}
                   onChange={(e) => setSubCategoryId(e.target.value)}
                 ></input>
@@ -298,7 +298,7 @@ const ShowSubCategory = () => {
                   type='text'
                   id='name'
                   className='form-control'
-                  placeholder='Nombre Autoparte'
+                  placeholder='Nombre SubCategoria'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 ></input>
@@ -312,7 +312,7 @@ const ShowSubCategory = () => {
                   type='text'
                   id='description'
                   className='form-control'
-                  placeholder='Estado del producto'
+                  placeholder='Estado de la SubCategoria'
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                 ></input>
