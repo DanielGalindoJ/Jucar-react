@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -8,90 +7,64 @@ import { show_alerta } from '../functions';
 //import DataTable from 'datatables.net-dt';
 //import '../styles.css';
 
-const ShowAutoparts = () => {
-  const url = 'https://localhost:7028/api/autoparts';
-  const [autopartID,setAutopartId] = useState('')
+const ShowCategory = () => {
+  const url = 'https://localhost:7028/api/categories';
+  const [categoryId,setCategoryId] = useState('')
 
-  const URL = `${url}/${autopartID}`;
+  const URL = `${url}/${categoryId}`;
   
-  const [autoparts,setAutoparts] = useState([])
+  const [categories,setCategories] = useState([])
   const [name,setName] = useState('')
-  const [description,setDescription] = useState('')
-  const [weightKgs,setWeightKgs] = useState('')
-  const [heightCm,setHeightCm] = useState('')
-  const [lengthCm,setLengthCm] = useState('')
-  const [vehicleZone,setVehicleZone] = useState('')
- // const [state,setState] = useState()
-//   const [creationDate,setCreationDate] = useState()
-//   const [modificationDate,setModificationDate] = useState()
+  
+  const [state,setState] = useState()
+  const [creationDate,setCreationDate] = useState()
+  const [modificationDate,setModificationDate] = useState()
   const [operation,setOpertaion]=useState([1])
   const [title, setTitle] = useState('');
 
   useEffect(() => {
-    getAutoparts();
+    getCategory();
   }, []);
 
-  const getAutoparts = async () => {
+  const getCategory = async () => {
     const respuesta = await axios.get(url);
-    setAutoparts(respuesta.data);
+    setCategories(respuesta.data);
   };
 
-  const openModal = (op, name,description,weightKgs,heightCm,lengthCm,state,vehicleZone,creationDate,modificationDate,autopartID) => {
-    setAutopartId('')
-    setName('')
-    setDescription('')
-    setWeightKgs('')
-    setHeightCm('')
-    setLengthCm('')
-    //setState('')
-    setVehicleZone('')
-    // setCreationDate(Date)
-    // setModificationDate(Date)
+  const openModal = (op, name,state,creationDate,modificationDate, categoryId) => {
+    setCategoryId('')
+    setName('') 
+    setState('')
+    setCreationDate(Date)
+    setModificationDate(Date)
     setOpertaion(op);
 
 
-    if (op === 1) {
-      setTitle('Registrar Autoparte');
+    if (op === 1) { 
+      setTitle('Registrar Categoria');
     } else if (op === 2) {
-      setTitle('Editar Autoparte');
-      setAutopartId(autopartID)
+      setTitle('Editar Categoria');
+      setCategoryId(categoryId)
       setName(name);
-      setDescription(description)
-      setWeightKgs(weightKgs)
-      setHeightCm(heightCm)
-      setLengthCm(lengthCm)
-      //setState(state)
-      setVehicleZone(vehicleZone)
-    //   setCreationDate(creationDate)
-    //   setModificationDate(modificationDate)
+      setState(state)
+      setCreationDate(creationDate)
+      setModificationDate(modificationDate)
     }
     window.setTimeout(function () {
       document.getElementById('name').focus();
     }, 500);
   };
 
-  const validar = (autopartID) => {
+  const validar = (categoryId) => {
     console.log("Validar función ejecutada"); // Mensaje de depuración
     var parametros;
     var metodo;
     if (name.trim() === ''){
-        show_alerta('Escribe el nombre del autoparte.', 'warning');
+        show_alerta('Escribe el nombre de la categoria.', 'warning');
     }
-      else if(description.trim() === ''){
-        show_alerta ('Escribe la descripcion del autoparte', 'warning');
-    }
-    else if(weightKgs.trim() === ''){
-      show_alerta('Escribe el ancho del autoparte', 'warning');
     
-    }else if(heightCm.trim() === ''){
-      show_alerta('Escribe la Altura del autoparte', 'warning');
-    
-    }else if(lengthCm.trim() === ''){
-      show_alerta('Escribe la longitud del autoparte', 'warning');
-    
-     }else if(vehicleZone === ''){
-       show_alerta('Escribe la Zona del Vehiculo del autoparte', 'warning');
-    
+    else if(state.trim() === ''){
+      show_alerta('Escribe el estado de la categoria', 'warning');   
      }
     
     else 
@@ -99,32 +72,22 @@ const ShowAutoparts = () => {
       if (operation === 1) {
         parametros = {
           name: name.trim(),
-          description: description.trim(),
-          weightKgs: weightKgs.trim(),
-          heightCm: heightCm.trim(),
-          lengthCm: lengthCm.trim(),
-          //state: state.trim(),
-          vehicleZone: vehicleZone,
-        //   creationDate: creationDate,
-        //   modificationDate: modificationDate
+          state: state.trim(),
+          creationDate:creationDate,
+           modificationDate: modificationDate,
         };
         metodo = 'POST';
       } else {
         parametros = {
           name: name.trim(),
-          description: description.trim(),
-          weightKgs: weightKgs.trim(),
-          heightCm: heightCm.trim(),
-          lengthCm: lengthCm.trim(),
-          //state: state.trim(),
-          vehicleZone: vehicleZone,
-        //   creationDate: creationDate,
-        //   modificationDate: modificationDate
+          state: state.trim(),
+          modificationDate: modificationDate.trim(Date)
+
         };
         metodo = 'PUT';
       }
-      enviarSolicitud(metodo, parametros,autopartID);
-      confirmarSolicitud(metodo, parametros, autopartID);
+      enviarSolicitud(metodo, parametros,categoryId);
+      confirmarSolicitud(metodo, parametros, categoryId);
       
     }
   };
@@ -137,7 +100,7 @@ const ShowAutoparts = () => {
         show_alerta(msj, tipo);
         if (tipo === 'success') {
           document.getElementById('btnCerrar').click();
-          getAutoparts();
+          getCategory();
         }
       })
       .catch(function (error) {
@@ -153,7 +116,7 @@ const ShowAutoparts = () => {
         show_alerta(msj, tipo);
         if (tipo === 'success') {
           document.getElementById('btnCerrar').click();
-          getAutoparts();
+          getCategory();
         }
       })
       .catch(function (error) {
@@ -161,7 +124,7 @@ const ShowAutoparts = () => {
         console.log(error);
       });
   };
-  const deleteAutopart = (autopartID, name) => {
+  const deleteAutopart = (categoryId, name) => {
     const MySwal = withReactContent(Swal);
 
     MySwal.fire({
@@ -175,16 +138,16 @@ const ShowAutoparts = () => {
       if (result.isConfirmed) {
         try {
           // Realizar la solicitud DELETE al servidor
-          await axios.delete(`${url}/${autopartID}`);
+          await axios.delete(`${url}/${categoryId}`);
 
           show_alerta('Autoparte eliminado exitosamente', 'success');
-          getAutoparts();
+          getCategory();
         } catch (error) {
-          show_alerta('Error al eliminar el Autoparte', 'error');
+          show_alerta('Error al eliminar la categoria', 'error');
           console.error(error);
         }
       } else {
-        show_alerta('El Autoparte no fue eliminado', 'info');
+        show_alerta('La categoria no fue eliminado', 'info');
       }
     });
   
@@ -222,7 +185,7 @@ const ShowAutoparts = () => {
         <div className='row mt-3'>
           <div className='col-md-4 offset-4'>
             <div className='d-grid mx-auto'>
-              <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalAutoparts'>
+              <button onClick={() => openModal(1)} className='btn btn-dark' data-bs-toggle='modal' data-bs-target='#modalCategory'>
                 <i className='fa-solid fa-circle-plus'></i> Añadir
               </button>
             </div>
@@ -236,11 +199,6 @@ const ShowAutoparts = () => {
                   <tr>
                   <th>#</th>
                     <th>Nombre</th>
-                    <th>Description</th>
-                    <th>WeightKgs</th>
-                    <th>HeightCm</th>
-                    <th>LengthCm</th>
-                    <th>Zona del Vehiculo</th>
                     <th>Estado</th>
                     <th>Fecha de Creacion</th>
                     <th>Fecha de Modificacion</th>
@@ -248,30 +206,20 @@ const ShowAutoparts = () => {
                   </tr>
                 </thead>
                 <tbody className='table-group-divider'>
-                  {autoparts.map((autoparts, i) => (
-                    <tr key={autoparts.autopartID}>
+                  {categories.map((categories, i) => (
+                    <tr key={categories.categoryId}>
                       <td>{i + 1}</td>
-                      <td>{autoparts.name}</td>
-                      <td>{autoparts.description}</td>
-                      <td>{autoparts.weightKgs}</td>
-                      <td>{autoparts.heightCm}</td>
-                      <td>{autoparts.lengthCm}</td>
-                      <td>{autoparts.vehicleZone}</td>
-                      <td>{autoparts.state}</td>
-                      <td>{autoparts.creationDate}</td>
-                      <td>{autoparts.modificationDate}</td>
+
+                      <td>{categories.state}</td>
+                      <td>{categories.creationDate}</td>
+                      <td>{categories.modificationDate}</td>
                       <td>
                         <button
                           onClick={() =>
-                            openModal(2, autoparts.name,
-                              autoparts.description,
-                              autoparts.weightKgs,
-                              autoparts.heightCm, 
-                              autoparts.lengthCm,
-                               autoparts.vehicleZone,
-                               autoparts.state,
-                               autoparts.creationDate, 
-                               autoparts.modModificationDate)
+                            openModal(2, categories.name,
+                               categories.state,
+                               categories.creationDate, 
+                               categories.modModificationDate)
                           }
                           className='btn btn-warning'
                           data-bs-toggle='modal'
@@ -281,7 +229,7 @@ const ShowAutoparts = () => {
                         </button>
                         &nbsp;
                        
-                        <button onClick={()=>deleteAutopart(autoparts.autopartID,autoparts.name)} className="btn btn-danger">
+                        <button onClick={()=>deleteAutopart(categories.categoryId,categories.name)} className="btn btn-danger">
                             <i className="fa-solid fa-trash"></i>
                         </button>
                         
@@ -319,7 +267,7 @@ const ShowAutoparts = () => {
           </div>
         </div>
       </div>
-      <div id='modalAutoparts' className='modal fade' aria-hidden='true'>
+      <div id='modalCategory' className='modal fade' aria-hidden='true'>
         <div className='modal-dialog'>
           <div className='modal-content'>
             <div className='modal-header'>
@@ -342,72 +290,7 @@ const ShowAutoparts = () => {
                   onChange={(e) => setName(e.target.value)}
                 ></input>
               </div>
-              <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa fa-user'></i>
-                </span>
-                <input
-                  type='text'
-                  id='description'
-                  className='form-control'
-                  placeholder='Descripcion'
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></input>
-            </div>
-            <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa fa-user'></i>
-                </span>
-                <input
-                  type='text'
-                  id='peso'
-                  className='form-control'
-                  placeholder='peso'
-                  value={weightKgs}
-                  onChange={(e) => setWeightKgs(e.target.value)}
-                ></input>
-            </div>
-            <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa-solid fa-gift'></i>
-                </span>
-                <input
-                  type='text'
-                  id='largo'
-                  className='form-control'
-                  placeholder='largo'
-                  value={heightCm}
-                  onChange={(e) => setHeightCm(e.target.value)}
-                ></input>
-            </div>
-            <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa-solid fa-gift'></i>
-                </span>
-                <input
-                  type='text'
-                  id='ancho'
-                  className='form-control'
-                  placeholder='ancho'
-                  value={lengthCm}
-                  onChange={(e) => setLengthCm(e.target.value)}
-                ></input>
-            </div>
             
-            <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa-solid fa-gift'></i>
-                </span>
-                <input
-                  type='text'
-                  id='description'
-                  className='form-control'
-                  placeholder='Zona del vehiculo'
-                  value={vehicleZone}
-                  onChange={(e) => setVehicleZone(e.target.value)}
-                ></input>
-            </div>
                 
               </div>
               <div className='input-group mb-3'>
@@ -438,4 +321,4 @@ const ShowAutoparts = () => {
   );
 };
 
-export default ShowAutoparts;
+export default ShowCategory;
