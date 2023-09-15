@@ -1,6 +1,7 @@
 import {  Routes, Route,BrowserRouter } from "react-router-dom";
-//import ShowAutoparts from "./Components/ShowAutoparts";
-import ShowCategory from "./Components/ShowCategory"
+import ShowAutoparts from "./Components/ShowAutoparts";
+//import ShowCategory from "./Components/ShowCategory"
+//import ShowSubCategory from "./Components/ShowSubCategory ";
 
 
 
@@ -9,8 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-       // <ShowAutoparts></ShowAutoparts>||
-        <ShowCategory></ShowCategory>
+       <ShowAutoparts></ShowAutoparts>
+        
         }>
            </Route>
       </Routes>

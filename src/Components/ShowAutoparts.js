@@ -12,7 +12,7 @@ const ShowAutoparts = () => {
   const url = ' https://localhost:7028/api/autoparts ';
   const [autopartID,setAutopartId] = useState('')
 
-  const URL = `https://localhost:3001/api/autoparts${autopartID}`;
+  const URL = `https://localhost:7028/api/autoparts${autopartID}`;
   
   const [autoparts,setAutoparts] = useState([])
   const [name,setName] = useState('')
@@ -21,9 +21,9 @@ const ShowAutoparts = () => {
   const [heightCm,setHeightCm] = useState('')
   const [lengthCm,setLengthCm] = useState('')
   const [vehicleZone,setVehicleZone] = useState('')
-  const [state,setState] = useState()
-  const [creationDate,setCreationDate] = useState()
-  const [modificationDate,setModificationDate] = useState()
+ // const [state,setState] = useState()
+//   const [creationDate,setCreationDate] = useState()
+//   const [modificationDate,setModificationDate] = useState()
   const [operation,setOpertaion]=useState([1])
   const [title, setTitle] = useState('');
 
@@ -36,16 +36,17 @@ const ShowAutoparts = () => {
     setAutoparts(respuesta.data);
   };
 
-  const openModal = (op, name,description,weightKgs,heightCm,lengthCm,state,vehicleZone,creationDate,modificationDate) => {
+  const openModal = (op, name,description,weightKgs,heightCm,lengthCm,state,vehicleZone,creationDate,modificationDate,autopartID) => {
+    setAutopartId('')
     setName('')
     setDescription('')
     setWeightKgs('')
     setHeightCm('')
     setLengthCm('')
-    setState('')
+    //setState('')
     setVehicleZone('')
-    setCreationDate(Date.now)
-    setModificationDate(Date.now)
+    // setCreationDate(Date)
+    // setModificationDate(Date)
     setOpertaion(op);
 
 
@@ -53,15 +54,16 @@ const ShowAutoparts = () => {
       setTitle('Registrar Autoparte');
     } else if (op === 2) {
       setTitle('Editar Autoparte');
+      setAutopartId(autopartID)
       setName(name);
       setDescription(description)
       setWeightKgs(weightKgs)
       setHeightCm(heightCm)
       setLengthCm(lengthCm)
-      setState(state)
+      //setState(state)
       setVehicleZone(vehicleZone)
-      setCreationDate(creationDate)
-      setModificationDate(modificationDate)
+    //   setCreationDate(creationDate)
+    //   setModificationDate(modificationDate)
     }
     window.setTimeout(function () {
       document.getElementById('name').focus();
@@ -87,9 +89,6 @@ const ShowAutoparts = () => {
     }else if(lengthCm.trim() === ''){
       show_alerta('Escribe la longitud del autoparte', 'warning');
     
-    }else if(state.trim() === ''){
-      show_alerta('Escribe el estado del autoparte', 'warning');
-    
      }else if(vehicleZone === ''){
        show_alerta('Escribe la Zona del Vehiculo del autoparte', 'warning');
     
@@ -104,10 +103,10 @@ const ShowAutoparts = () => {
           weightKgs: weightKgs.trim(),
           heightCm: heightCm.trim(),
           lengthCm: lengthCm.trim(),
-          state: state.trim(),
+          //state: state.trim(),
           vehicleZone: vehicleZone,
-          creationDate:creationDate.trim(),
-           modificationDate: modificationDate.trim(),
+        //   creationDate: creationDate,
+        //   modificationDate: modificationDate
         };
         metodo = 'POST';
       } else {
@@ -117,10 +116,10 @@ const ShowAutoparts = () => {
           weightKgs: weightKgs.trim(),
           heightCm: heightCm.trim(),
           lengthCm: lengthCm.trim(),
-          state: state.trim(),
+          //state: state.trim(),
           vehicleZone: vehicleZone,
-          modificationDate: modificationDate.trim(Date)
-
+        //   creationDate: creationDate,
+        //   modificationDate: modificationDate
         };
         metodo = 'PUT';
       }
@@ -162,7 +161,7 @@ const ShowAutoparts = () => {
         console.log(error);
       });
   };
-  const deleteAutopart = (id, name) => {
+  const deleteAutopart = (autopartID, name) => {
     const MySwal = withReactContent(Swal);
 
     MySwal.fire({
@@ -176,7 +175,7 @@ const ShowAutoparts = () => {
       if (result.isConfirmed) {
         try {
           // Realizar la solicitud DELETE al servidor
-          await axios.delete(`${url}/${id}`);
+          await axios.delete(`${url}/${autopartID}`);
 
           show_alerta('Autoparte eliminado exitosamente', 'success');
           getAutoparts();
@@ -329,19 +328,7 @@ const ShowAutoparts = () => {
             </div>
             <div className='modal-body'>
               <input type='hidden' id='id'></input>
-              <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa fa-user'></i>
-                </span>
-                <input
-                  type='text'
-                  id='autoparte'
-                  className='form-control'
-                  placeholder='Autoparte Id'
-                  value={autopartID}
-                  onChange={(e) => setAutopartId(e.target.value)}
-                ></input>
-              </div>
+              
               <div className='input-group mb-3'>
                 <span className='input-group-text'>
                   <i className='fa fa-user'></i>
@@ -374,9 +361,9 @@ const ShowAutoparts = () => {
                 </span>
                 <input
                   type='text'
-                  id='description'
+                  id='peso'
                   className='form-control'
-                  placeholder='Ancho'
+                  placeholder='peso'
                   value={weightKgs}
                   onChange={(e) => setWeightKgs(e.target.value)}
                 ></input>
@@ -387,7 +374,7 @@ const ShowAutoparts = () => {
                 </span>
                 <input
                   type='text'
-                  id='description'
+                  id='largo'
                   className='form-control'
                   placeholder='largo'
                   value={heightCm}
@@ -400,26 +387,14 @@ const ShowAutoparts = () => {
                 </span>
                 <input
                   type='text'
-                  id='description'
+                  id='ancho'
                   className='form-control'
-                  placeholder='mm'
+                  placeholder='ancho'
                   value={lengthCm}
                   onChange={(e) => setLengthCm(e.target.value)}
                 ></input>
             </div>
-            <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa-solid fa-gift'></i>
-                </span>
-                <input
-                  type='text'
-                  id='description'
-                  className='form-control'
-                  placeholder='Estado del producto'
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                ></input>
-            </div>
+            
             <div className='input-group mb-3'>
                 <span className='input-group-text'>
                   <i className='fa-solid fa-gift'></i>
