@@ -21,7 +21,7 @@ const ShowAutoparts = () => {
   const [lengthCm,setLengthCm] = useState('')
   const [vehicleZone,setVehicleZone] = useState('')
   const [idToEdit, SetidToEdit] = useState(null);
-  const [subCategories, setSubCategories] = useState();
+  const [subCategories, setSubCategories] = useState('');
   const [subCategoryId,setSubCategoryId] = useState('')
   const [operation,setOpertaion]=useState([1])
   const [title, setTitle] = useState('');
@@ -235,6 +235,7 @@ const ShowAutoparts = () => {
                 <thead>
                   <tr>
                   <th>#</th>
+                    <th>SubCategoria</th>
                     <th>Nombre</th>
                     <th>Description</th>
                     <th>WeightKgs</th>
@@ -253,6 +254,7 @@ const ShowAutoparts = () => {
                   {autoparts.map((autoparts, i) => (
                     <tr key={autoparts.autopartID}>
                       <td>{i + 1}</td>
+                      <td>{subCategories.name}</td>
                       <td>{autoparts.name}</td>
                       <td>{autoparts.description}</td>
                       <td>{autoparts.weightKgs}</td>
