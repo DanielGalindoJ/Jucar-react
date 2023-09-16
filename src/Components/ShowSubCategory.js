@@ -22,6 +22,8 @@ const ShowSubCategory = () => {
   const [modificationDate,setModificationDate] = useState()
   const [operation,setOpertaion]=useState([1])
   const [title, setTitle] = useState('');
+  const [idToEdit, SetidToEdit] = useState(null);
+
 
   useEffect(() => {
     getSubCategory();
@@ -37,13 +39,13 @@ const ShowSubCategory = () => {
     setCategorias(respuesta.data);
   };
 
-  const openModal = (op, name,state,creationDate,modificationDate) => {
+  const openModal = (op, name,state,creationDate,modificationDate, subCategoryId) => {
     setName('') 
     setState('')
     setCreationDate(Date)
     setModificationDate(Date)
     setOpertaion(op);
-
+    setSubCategoryId()
 
     if (op === 1) {
       setTitle('Registrar SubCategoria');
@@ -56,6 +58,7 @@ const ShowSubCategory = () => {
       setState(state)
       setCreationDate(creationDate)
       setModificationDate(modificationDate)
+      SetidToEdit(subCategoryId);
     }
     window.setTimeout(function () {
       document.getElementById('name').focus();
@@ -298,7 +301,7 @@ const deleteSubCategory = (subCategoryId, name) => {
             </div>
             <div className='modal-body'>
               <input type='hidden' id='id'></input>
-              <div className='input-group mb-3'>
+              {/* <div className='input-group mb-3'>
                 <span className='input-group-text'>
                   <i className='fa fa-user'></i>
                 </span>
@@ -310,7 +313,21 @@ const deleteSubCategory = (subCategoryId, name) => {
                   value={subCategoryId}
                   onChange={(e) => setSubCategoryId(e.target.value)}
                 ></input>
-              </div>
+              </div> */}
+              <select
+                  id="tipo"
+                  className="form-control"
+                  onChange={(e) => setCategoriaId(e.target.value)}
+                >
+                  <option value="" disabled selected>
+                    Selecciona una categoría
+                  </option>
+                  {categorias.map((categoria) => (
+                    <option key={categoria.CategoriaId} value={categoria.CategoriaId}>
+                      {categoria.nombre}
+                    </option>
+                  ))}
+                </select>
               <div className='input-group mb-3'>
                 <span className='input-group-text'>
                   <i className='fa fa-user'></i>
@@ -325,20 +342,15 @@ const deleteSubCategory = (subCategoryId, name) => {
                 ></input>
               </div>
              
-            <div className='input-group mb-3'>
-                <span className='input-group-text'>
-                  <i className='fa-solid fa-gift'></i>
-                </span>
-                <input
-                  type='text'
-                  id='description'
-                  className='form-control'
-                  placeholder='Estado de la SubCategoria'
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                ></input>
-            </div>
-                
+              <div className="d-grid col-6 mx-auto">
+                <button
+                  onClick={() => validar(idToEdit, name)}
+                  className="btn btn-success"
+                >
+                  <i className="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+              </div>
+               
               </div>
               <div className='input-group mb-3'>
                 <span className='input-group-text'>
