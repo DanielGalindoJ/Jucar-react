@@ -1,0 +1,115 @@
+.logoJucar{
+    width:"218"
+       height="117"
+       navbar-brand 
+  }
+  
+  .spanEnca{
+      text-align: center;
+        padding-top: 0px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+        font-size: 30px;
+        font-family: Alatsi, sans-serif;
+        color: var(--bs-white);
+        font-weight: bold;
+        padding-left: 0px;
+        padding-right: 55px;
+        margin-left: 18px;
+        margin-right: -24px;
+  }
+  
+  .navEnca{
+      margin: 0 px 0 px 0 px;
+    margin-top: 15px;
+    color: var(--bs-success);
+    background: var(--bs-red);
+    height: 150px;
+    padding: 150px 50px;
+    border-color: var(--bs-cyan);
+  }
+  .footPieD{
+    border-color: var(--bs-red);
+  }
+  .divPieD{
+    width: 1305px;
+  }
+  
+  .P1Foo{
+    font-size: 35px;
+    font-family: Alatsi,
+     sans-serif;
+     text-align: center;
+  }
+  .P2Foo{
+    font-size:
+     27px;font-family:
+     Alatsi, sans-serif;
+     text-align: center;
+     width: 1239px;
+     height: 28.5px;
+     margin: 3px;
+  }
+  
+  .L1Foo{
+    font-size: 36px;
+    font-weight: bold;
+    width: 36px;
+    margin: -5px;
+  }
+
+  .div1IniSesi{
+    margin-top: -76px;
+  }
+  .div2IniSesi{
+    border-radius: 1rem;
+  }
+  .div3IniSesi{
+    margin-top: -68px;
+    margin-right: 6px;
+    margin-bottom: -60px;
+    margin-left: 0px;
+    padding: 0px;
+    padding-top: -21px;
+    padding-right: 2px;
+    padding-bottom: -45px;
+    padding-left: -3px;
+  }
+  .div4IniSesi{
+    border-radius: 1rem 0 0 1rem;
+    width: 423px;
+    height: 605.5px;
+    padding-top: 69px;
+    padding-bottom: 60px;
+  }
+
+  #formularioLogin{
+    /*div*/
+    color: #ff6219;
+    /*h5*/
+    letter-spacing: 1px;
+    font-family: Acme, sans-serif;
+        /*div*/
+    font-size: 20px;
+    font-family: Acme, sans-serif;
+        /*div*/
+    font-size: 20px;
+    font-family: Acme, sans-serif;
+  }
+  .buttonIngre{
+    background: var(--bs-red)
+
+  }
+
+  /*footer*/
+
+  .ulFott{
+    width: 1250px;height: 57px;margin: 2px;padding: 0px
+  }
+
+  .li1F{
+    font-size: 37px;
+  }
+  .li2F{
+    font-size: 36px;
+  }
