@@ -9,10 +9,10 @@ import { show_alerta } from '../functions';
 //import '../styles.css';
 
 const ShowAutoparts = () => {
-  const url = 'https://localhost:7028/api/autoparts/';
-  const urlSubCa='https://localhost:7028/api/subcategories'
+  const url = 'https://localhost:7028/api/autoparts/'; // https://localhost:7028/api/autoparts 
+  const urlSubCa=`https://localhost:7028/api/${subCategories}/${subCategoryId}/${autoparts}` //Todas las Autopartes de una Subcategoria:
   const [autopartID,setAutopartId] = useState('')
-  const URL = `${url}/${autopartID}`;
+  const URL = `${url}/${autopartID}`; // Autoparte Por Id:
   const [autoparts,setAutoparts] = useState([])
   const [name,setName] = useState('')
   const [description,setDescription] = useState('')

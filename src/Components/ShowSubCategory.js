@@ -9,11 +9,11 @@ import { show_alerta } from '../functions';
 //import '../styles.css';
 
 const ShowSubCategory = () => {
-  const url = 'https://localhost:7028/api/subcategories/';
-  const urlCate = 'https://localhost:7028/api/categories'
+  const url = 'https://localhost:7028/api/subcategories/'; // todas las subcategorias
+  const urlCate = `https://localhost:7028/api/categories/${CategoriaId}/subcategories/${subCategoryId}` // Subcategoria especifica de Categoria:
   const [subCategoryId,setSubCategoryId] = useState('')
   const [CategoriaId, setCategoriaId] = useState([1]);
-  const URL = `https://localhost:7028/api/subcategories${subCategoryId}`;
+  const URL = `https://localhost:7028/api/subcategories${subCategoryId}`; // subCategoria por ID
   const [subCategories,setSubCategories] = useState([])
   const [categorias, setCategorias] = useState([])
   const [name,setName] = useState('')

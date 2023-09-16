@@ -8,10 +8,10 @@ import { show_alerta } from '../functions';
 //import '../styles.css';
 
 const ShowCategory = () => {
-  const url = 'https://localhost:7028/api/categories/';
+  const url = 'https://localhost:7028/api/categories/'; //Todas las Categorias
   const [categoryId,setCategoryId] = useState('')
 
-  const URL = `${url}/${categoryId}`;
+  const URL = `${url}/${categoryId}`; //Categoria Por Id:
   
   const [categories,setCategories] = useState([])
   const [name,setName] = useState('')
