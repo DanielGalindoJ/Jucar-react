@@ -8,7 +8,7 @@ import { show_alerta } from '../functions';
 //import '../styles.css';
 
 const ShowCategory = () => {
-  const url = 'https://localhost:7028/api/categories';
+  const url = 'https://localhost:7028/api/categories/';
   const [categoryId,setCategoryId] = useState('')
 
   const URL = `${url}/${categoryId}`;

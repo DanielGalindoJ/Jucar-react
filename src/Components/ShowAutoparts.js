@@ -9,7 +9,7 @@ import { show_alerta } from '../functions';
 //import '../styles.css';
 
 const ShowAutoparts = () => {
-  const url = 'https://localhost:7028/api/autoparts';
+  const url = 'https://localhost:7028/api/autoparts/';
   const urlSubCa='https://localhost:7028/api/subcategories'
   const [autopartID,setAutopartId] = useState('')
   const URL = `${url}/${autopartID}`;
