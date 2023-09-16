@@ -10,10 +10,9 @@ import { show_alerta } from '../functions';
 
 const ShowAutoparts = () => {
   const url = 'https://localhost:7028/api/autoparts';
+  const urlSubCa='https://localhost:7028/api/subcategories'
   const [autopartID,setAutopartId] = useState('')
-
   const URL = `${url}/${autopartID}`;
-  
   const [autoparts,setAutoparts] = useState([])
   const [name,setName] = useState('')
   const [description,setDescription] = useState('')
@@ -21,19 +20,24 @@ const ShowAutoparts = () => {
   const [heightCm,setHeightCm] = useState('')
   const [lengthCm,setLengthCm] = useState('')
   const [vehicleZone,setVehicleZone] = useState('')
- // const [state,setState] = useState()
-//   const [creationDate,setCreationDate] = useState()
-//   const [modificationDate,setModificationDate] = useState()
+  const [idToEdit, SetidToEdit] = useState(null);
+  const [subCategories, setSubCategories] = useState();
+  const [subCategoryId,setSubCategoryId] = useState('')
   const [operation,setOpertaion]=useState([1])
   const [title, setTitle] = useState('');
 
   useEffect(() => {
     getAutoparts();
+    getSubCategory();
   }, []);
 
   const getAutoparts = async () => {
     const respuesta = await axios.get(url);
     setAutoparts(respuesta.data);
+  };
+  const getSubCategory = async () => {
+    const respuestaSub = await axios.get(urlSubCa);
+    getSubCategory(respuestaSub.data);
   };
 
   const openModal = (op, name,description,weightKgs,heightCm,lengthCm,state,vehicleZone,creationDate,modificationDate,autopartID) => {
@@ -43,15 +47,19 @@ const ShowAutoparts = () => {
     setWeightKgs('')
     setHeightCm('')
     setLengthCm('')
-    //setState('')
     setVehicleZone('')
-    // setCreationDate(Date)
-    // setModificationDate(Date)
     setOpertaion(op);
 
 
     if (op === 1) {
       setTitle('Registrar Autoparte');
+      setName('')
+      setDescription('')
+      setWeightKgs('')
+      setHeightCm('')
+      setLengthCm('')
+      setVehicleZone('')
+      setSubCategoryId('')
     } else if (op === 2) {
       setTitle('Editar Autoparte');
       setAutopartId(autopartID)
@@ -60,10 +68,10 @@ const ShowAutoparts = () => {
       setWeightKgs(weightKgs)
       setHeightCm(heightCm)
       setLengthCm(lengthCm)
-      //setState(state)
       setVehicleZone(vehicleZone)
-    //   setCreationDate(creationDate)
-    //   setModificationDate(modificationDate)
+      setSubCategoryId(subCategoryId)
+      SetidToEdit(autopartID);
+
     }
     window.setTimeout(function () {
       document.getElementById('name').focus();
@@ -74,19 +82,19 @@ const ShowAutoparts = () => {
     console.log("Validar función ejecutada"); // Mensaje de depuración
     var parametros;
     var metodo;
-    if (name.trim() === ''){
+    if (name === ''){
         show_alerta('Escribe el nombre del autoparte.', 'warning');
     }
-      else if(description.trim() === ''){
+      else if(description === ''){
         show_alerta ('Escribe la descripcion del autoparte', 'warning');
     }
-    else if(weightKgs.trim() === ''){
+    else if(weightKgs === ''){
       show_alerta('Escribe el ancho del autoparte', 'warning');
     
-    }else if(heightCm.trim() === ''){
+    }else if(heightCm === ''){
       show_alerta('Escribe la Altura del autoparte', 'warning');
     
-    }else if(lengthCm.trim() === ''){
+    }else if(lengthCm === ''){
       show_alerta('Escribe la longitud del autoparte', 'warning');
     
      }else if(vehicleZone === ''){
@@ -98,100 +106,92 @@ const ShowAutoparts = () => {
     {
       if (operation === 1) {
         parametros = {
-          name: name.trim(),
-          description: description.trim(),
-          weightKgs: weightKgs.trim(),
-          heightCm: heightCm.trim(),
-          lengthCm: lengthCm.trim(),
-          //state: state.trim(),
+          name: name,
+          description: description,
+          weightKgs: weightKgs,
+          heightCm: heightCm,
+          lengthCm: lengthCm,
           vehicleZone: vehicleZone,
-        //   creationDate: creationDate,
-        //   modificationDate: modificationDate
+          subCategoryId: subCategoryId
         };
         metodo = 'POST';
       } else {
         parametros = {
-          name: name.trim(),
-          description: description.trim(),
-          weightKgs: weightKgs.trim(),
-          heightCm: heightCm.trim(),
-          lengthCm: lengthCm.trim(),
-          //state: state.trim(),
+          name: name,
+          description: description,
+          weightKgs: weightKgs,
+          heightCm: heightCm,
+          lengthCm: lengthCm,
           vehicleZone: vehicleZone,
-        //   creationDate: creationDate,
-        //   modificationDate: modificationDate
+          subCategoryId: subCategoryId
         };
         metodo = 'PUT';
       }
       enviarSolicitud(metodo, parametros,autopartID);
-      confirmarSolicitud(metodo, parametros, autopartID);
       
     }
   };
 
-  const enviarSolicitud = async (metodo,parametros) => {
-    await axios({ method: metodo, url: url , data: parametros})
-      .then(function (respuesta) {
-        var tipo = respuesta.data[0];
-        var msj = respuesta.data[1];
-        show_alerta(msj, tipo);
-        if (tipo === 'success') {
-          document.getElementById('btnCerrar').click();
+  const enviarSolicitud = async (metodo,parametros, autopartID) => {
+    if (metodo === "POST") {
+      axios
+        .post(`${URL}`, parametros)
+        .then(function (respuesta) {
+          show_alerta("success", "Autoparte creado");
+          document.getElementById("btnCerrar").click();
           getAutoparts();
-        }
-      })
-      .catch(function (error) {
-        show_alerta('Error en la solicitud', 'error');
-        console.log(error);
-      });
-  };
-  const confirmarSolicitud = async ( metodo,parametros) => {
-    await axios({ method:metodo, url: URL, data: parametros })
-      .then(function (respuesta) {
-        var tipo = respuesta.data[0];
-        var msj = respuesta.data[1];
-        show_alerta(msj, tipo);
-        if (tipo === 'success') {
-          document.getElementById('btnCerrar').click();
+        })
+        .catch(function (error) {
+          show_alerta("error", "Error de solucitud");
+          console.log(error);
+        });
+    } else if (metodo === "PUT") {
+      axios
+        .put(`${URL}${autopartID}`, parametros)
+        .then(function (respuesta) {
+          console.log("Solicitud PUT exitosa:", respuesta.data);
+          // var tipo = respuesta.data[0];
+          // var msj = respuesta.data[1];
+          show_alerta("success", "autoparte editado con exito");
+          document.getElementById("btnCerrar").click();
           getAutoparts();
-        }
-      })
-      .catch(function (error) {
-        show_alerta('Error en la solicitud', 'error');
-        console.log(error);
-      });
+        })
+        .catch(function (error) {
+          show_alerta("error", "El autoparte no se edito");
+          console.log(error);
+        });
+    }
   };
+
   const deleteAutopart = (autopartID, name) => {
     const MySwal = withReactContent(Swal);
-
     MySwal.fire({
-      title: `¿Seguro desea eliminar este usuario ${name}?`,
-      icon: 'question',
-      text: 'No se podrá dar marcha atrás',
+      title: "¿Seguro quieres eliminar el autoparte " + name + "?",
+      icon: "question",
+      text: "No se podra dar marcha atras",
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminar',
-      cancelButtonText: 'Cancelar',
+      confirmButtonText: "Si, eliminar",
+      cancelButtonText: "Cancelar",
     }).then(async (result) => {
+      console.log(autopartID);
       if (result.isConfirmed) {
         try {
-          // Realizar la solicitud DELETE al servidor
-          await axios.delete(`${url}/${autopartID}`);
-
-          show_alerta('Autoparte eliminado exitosamente', 'success');
+          console.log(`${URL}/${autopartID}`);
+          await axios.delete(`${URL}${autopartID}`);
+          show_alerta("success", "Usuario eliminado exitosamente");
           getAutoparts();
         } catch (error) {
-          show_alerta('Error al eliminar el Autoparte', 'error');
+          console.log(`${URL}/${autopartID}`);
+          show_alerta("error", "Error al eliminar el producto");
           console.error(error);
         }
       } else {
-        show_alerta('El Autoparte no fue eliminado', 'info');
+        show_alerta("info", "El producto no fue eliminado");
       }
     });
-  
-
-}
+  };
   return (
-    <div className='App'>
+<div className='App'>
 
       
         {/* <nav className='navEnca' class="navbar navbar-expand-md py-3 navbar-light" >
@@ -248,6 +248,8 @@ const ShowAutoparts = () => {
                   </tr>
                 </thead>
                 <tbody className='table-group-divider'>
+                  {console.log(autoparts)}
+                  {console.log(subCategories)}
                   {autoparts.map((autoparts, i) => (
                     <tr key={autoparts.autopartID}>
                       <td>{i + 1}</td>
@@ -408,8 +410,36 @@ const ShowAutoparts = () => {
                   onChange={(e) => setVehicleZone(e.target.value)}
                 ></input>
             </div>
-                
+            <div className="input-group mb-3">
+                <span className="input-group-text">
+                  {" "}
+                  <i className="fa fa-product-hunt"></i>
+                </span>
+                <select
+                  id="tipo"
+                  className="form-control"
+                  onChange={(e) => setSubCategories(e.target.value)}
+                >
+                  <option value="" disabled selected>
+                    Selecciona una subcategoría
+                  </option>
+                  {subCategories.map((categoria) => (
+                    <option key={categoria.autopartID} value={categoria.subCategoryId}>
+                      {categoria.nombre}
+                    </option>
+                  ))}
+                </select>
+                <div className="d-grid col-6 mx-auto">
+                <button
+                  onClick={() => validar(idToEdit, name)}
+                  className="btn btn-success"
+                >
+                  <i className="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
               </div>
+              </div> 
+            <div>               
+              
               <div className='input-group mb-3'>
                 <span className='input-group-text'>
                   <i className='fa-solid fa-gift'></i>
@@ -434,8 +464,11 @@ const ShowAutoparts = () => {
         </div>
       </div>
     </div>
+  </div>
+</div>  
     
   );
-};
+                  };
+
 
 export default ShowAutoparts;

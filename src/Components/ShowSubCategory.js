@@ -35,8 +35,8 @@ const ShowSubCategory = () => {
     setSubCategories(respuesta.data);
   };
   const getCategories = async () => {
-    const respuesta = await axios.get(urlCate);
-    setCategorias(respuesta.data);
+    const respuestaC = await axios.get(urlCate);
+    setCategorias(respuestaC.data);
   };
 
   const openModal = (op, name,state,creationDate,modificationDate, subCategoryId) => {
@@ -105,7 +105,7 @@ const ShowSubCategory = () => {
         axios
           .post(`${URL}`, parametros)
           .then(function (respuesta) {
-            show_alerta("success", "Producto creado");
+            show_alerta("success", "SubCategoria creado");
             document.getElementById("btnCerrar").click();
             getSubCategory();
           })
@@ -120,12 +120,12 @@ const ShowSubCategory = () => {
             console.log("Solicitud PUT exitosa:", respuesta.data);
             // var tipo = respuesta.data[0];
             // var msj = respuesta.data[1];
-            show_alerta("success", "Producto editado con exito");
+            show_alerta("success", "SubCategoria editado con exito");
             document.getElementById("btnCerrar").click();
             getSubCategory();
           })
           .catch(function (error) {
-            show_alerta("error", "El producto no se edito");
+            show_alerta("error", "La SubCategoria no se edito");
             console.log(error);
           });
       }
