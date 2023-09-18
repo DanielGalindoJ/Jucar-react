@@ -1,0 +1,161 @@
+.logoJucar{
+    width:"218"
+       height="117"
+       navbar-brand 
+  }
+  
+  .spanEnca{
+      text-align: center;
+        padding-top: 0px;
+        padding-bottom: 5px;
+        margin-top: 2px;
+        font-size: 30px;
+        font-family: Alatsi, sans-serif;
+        color: var(--bs-white);
+        font-weight: bold;
+        padding-left: 0px;
+        padding-right: 55px;
+        margin-left: 18px;
+        margin-right: -24px;
+  }
+  
+  .navEnca{
+      margin: 0 px 0 px 0 px;
+    margin-top: 15px;
+    color: var(--bs-success);
+    background: var(--bs-red);
+    height: 150px;
+    padding: 150px 50px;
+    border-color: var(--bs-cyan);
+  }
+
+
+  /* section*/
+
+.section1M{
+    margin-top: 2px;
+    margin-bottom: -28px;
+}
+
+.div1sec{
+    padding-top: 0px;
+    margin-top: -40px;
+}
+
+.h1{
+    font-family: Aclonica, sans-serif
+}
+
+.etUL{
+    padding-top: 0px;margin-top: -54px;
+}
+.span1{
+    font-size: 18px;
+    font-family: Acme, sans-serif;
+    color: var(--bs-emphasis-color)
+}
+
+/* menu div*/
+.di11{
+    margin-left: -20px;padding-right: 0px;
+    padding-bottom: 205px;
+    margin-right: -50px;--bs-success: #198754;--bs-success-rgb: 25,135,84;--bs-light: #f8f9fa;--bs-light-rgb: 248,249,250;
+    background: var(--bs-gray-500);
+    color: var(--bs-light);
+    border-color: var(--bs-pink);
+    border-bottom-color: #6caee0;
+    padding-top: 1px 
+}
+.sectionM{
+    background: var(--bs-gray-500);padding-bottom: 67px;
+    padding-top: 560px;
+    margin: 0px;
+    height: 300px;
+    width: 1000px;
+    padding-right: 37px;
+    padding-left: 0px
+}
+.div1Me{
+    padding-right: 23px;
+    width: 1181px;
+    padding-left: 0px;
+    padding-bottom: 237px;
+    margin-right: -211px;
+    padding-top: -7px
+}
+.div2Me{
+    padding: 0px;padding-left: 47px;padding-bottom: 27px;padding-right: 75px;margin: -2px 50px 100px 68px;margin-left: -34px;margin-bottom: -160px;margin-right: -52px;height: 702px;width: 2497px;margin-top: -9px 
+}
+
+.div3Me{
+    width: 213.3px;padding: 3px;height: 286px;margin: 27px 0px 300px
+}
+.div4Me{
+    width: 212.297px;height: 276px;padding: 5px;margin: 4px
+}
+.cliente{
+    height: 207px;margin: -4px 0px 0px;margin-top: -1px;padding: 6px;width: 206px
+}
+.pMe1{
+    font-size: 20px;font-family: Alatsi, sans-serif;text-align: center;color: var(--bs-emphasis-color)
+}
+.div5Me{
+    width: 213.3px;padding: 3px;height: 286px;margin: 27px 0px 300px
+}
+.div6Me{
+    width: 212.297px;height: 276px;padding: 5px;margin: 4px
+}
+.imgProducto{
+    height: 207px;margin: -4px 0px 0px;margin-top: -1px;padding: 6px;width: 206px
+}
+.pMe2{
+    font-size: 20px;font-family: Alatsi, sans-serif;text-align: center;color: var(--bs-emphasis-color)
+}
+.div7Me{
+    width: 213.3px;padding: 3px;height: 286px;margin: 27px 0px 300px
+}
+.div8Me{
+    width: 212.297px;height: 276px;padding: 5px;margin: 4px
+}
+.imgProvve{
+    height: 207px;margin: -4px 0px 0px;margin-top: -1px;padding: 6px;width: 206px
+}
+.pMe3{
+    font-size: 20px;font-family: Alatsi, sans-serif;text-align: center;color: var(--bs-emphasis-color)
+}
+.div9Me{
+    width: 213.3px;padding: 3px;height: 286px;margin: 27px 0px 300px
+}
+.div10Me{
+    width: 212.297px;height: 276px;padding: 5px;margin: 4px
+}
+.imgPedidos{
+    height: 207px;margin: -4px 0px 0px;margin-top: -1px;padding: 6px;width: 206px
+}
+.pMe4{
+    font-size: 20px;font-family: Alatsi, sans-serif;text-align: center;color: var(--bs-emphasis-color)
+}
+.div11Me{
+    width: 213.3px;padding: 3px;height: 286px;margin: 27px 0px 300px
+}
+.div12Me{
+    width: 212.297px;height: 276px;padding: 5px;margin: 4px
+}
+.imgFactura{
+    height: 207px;margin: -4px 0px 0px;margin-top: -1px;padding: 6px;width: 206px
+}
+.pMe5{
+    font-size: 20px;font-family: Alatsi, sans-serif;text-align: center;color: var(--bs-emphasis-color)
+}
+.div13Me{
+    width: 213.3px;padding: 3px;height: 286px;margin: 27px 0px 300px
+}
+.div14Me{
+    width: 212.297px;height: 276px;padding: 5px;margin: 4px
+}
+.imgPedidos{
+    height: 207px;margin: -4px 0px 0px;margin-top: -1px;padding: 6px;width: 206px
+}
+.pMe6{
+    font-size: 20px;font-family: Alatsi, sans-serif;text-align: center;color: var(--bs-emphasis-color)
+}

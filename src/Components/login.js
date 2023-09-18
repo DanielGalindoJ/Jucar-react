@@ -1,6 +1,5 @@
 
 import React from 'react';
-
 import logoJucar from "../assets/imgs/logoJucar.jpg"
 import tuercas from "../assets/imgs/logoJucar.jpg"
 //import DataTable from 'datatables.net-dt';
@@ -10,7 +9,7 @@ const login = () =>{
     return(
          <><><nav className='navEnca' class="navbar navbar-expand-md py-3 navbar-light">
             <div class="container">
-                <a class="d-flex align-items-center" href='.'>
+                <a class="d-flex align-items-center" href='logo'>
                     <img alt='logoJucar' className='logo' src={logoJucar} /></a>
                 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-1">
                     <span class="visually-hidden">Toggle navigation</span>
@@ -40,7 +39,7 @@ const login = () =>{
                                             <h5 class="fw-normal mb-3 pb-3">Iniciar sesión en su cuenta</h5>
                                             <div class="form-outline mb-4"><input id="form2Example17" class="form-control form-control-lg form-control form-control form-control form-control" type="email" /><label class="form-label form-label form-label form-label form-label" for="form2Example17">Email </label></div>
                                             <div class="form-outline mb-4"><input id="form2Example27" class="form-control form-control-lg form-control form-control form-control form-control" type="password" /><label class="form-label form-label form-label form-label form-label" for="form2Example27">Contraseña</label></div>
-                                            <div className='buttonIngre' class="pt-1 mb-4"><a class="btn btn-dark btn-lg btn-block" role="button" href="menu-1.html">INGRESAR</a></div><a class="small text-muted" href="Olvido password.html">Olvidaste la Contraseña?</a>
+                                            <div className='buttonIngre' class="pt-1 mb-4"><a class="btn btn-dark btn-lg btn-block" role="button" href="/menu">INGRESAR</a></div><a class="small text-muted" href="Olvido password.html">Olvidaste la Contraseña?</a>
                                         </form><a class="small text-muted" href="Registro Usuario.html">Aun no tienes perfil?</a>
                                     </div>
                                 </div>
@@ -48,13 +47,14 @@ const login = () =>{
                         </div>
                     </div>
                 </div>
-            </div></><footer className='footPieD' class="text-center bg-dark">
+            </div></>
+            <footer className='footPieD' class="text-center bg-dark">
                 <div className='divPieD' class="container text-white py-4 py-lg-5">
                     <ul class="list-inline">
                         <li class="list-inline-item"></li>
                     </ul>
                     <p className='P1Foo'>Derechos reservados Jucar S.A.S</p>
-                    <p className='P2Foo'>Calle 7 #90-76 </p>
+                    <p className='P2Foo'>Calle 7 #90-76</p>
                     <ul className='ulFott' class="list-inline" >
                         <li className='L1Foo' class="list-inline-item me-4"><svg class="bi bi-facebook text-light" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
