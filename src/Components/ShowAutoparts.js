@@ -6,7 +6,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { show_alerta } from '../functions';
 import logoJucar from "../assets/img/logoJucar.jpg"
 //import DataTable from 'datatables.net-dt';
-//import '../styles.css';
+import "../assets/css/autopats.css;"
 
 const ShowAutoparts = () => {
   const url = 'https://localhost:7028/api/autoparts/'; // https://localhost:7028/api/autoparts 
